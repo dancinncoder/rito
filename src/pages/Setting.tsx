@@ -1,21 +1,21 @@
 import { styled } from "styled-components";
 import Navbar from "../components/Navbar";
 
-function Home() {
+function Setting() {
   return (
     <StHomeContainer>
       <Navbar />
       <StMain>
-        <h1>MY PROJECTS</h1>
+        <h1>TEMP</h1>
       </StMain>
     </StHomeContainer>
   );
 }
 
-export default Home;
+export default Setting;
 
 const StHomeContainer = styled.div`
-  border: #d0d0d0 1px solid;
+  border: red 1px solid;
   display: flex;
   align-items: center;
   justify-content: center;

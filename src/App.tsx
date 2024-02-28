@@ -4,6 +4,7 @@ import GlobalStyle from "./GlobalStyle";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Project from "./pages/Project";
+import Setting from "./pages/Setting";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Project />} />
+        {/* <Route path="/project:id" element={<Project />} /> */}
+        <Route path="/setting" element={<Setting />} />
       </Routes>
     </StOuterFrame>
   );
