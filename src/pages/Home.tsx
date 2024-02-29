@@ -2,6 +2,8 @@ import { keyframes, styled } from "styled-components";
 import Navbar from "../components/Navbar";
 import uuid from "react-uuid";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import NewProjectModal from "../components/NewProjectModal";
 
 type ProjectType = {
   id: string;
@@ -9,6 +11,8 @@ type ProjectType = {
 };
 
 function Home() {
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
   //dummy data
   const projects: ProjectType[] = [
     { id: uuid(), title: "PROJECT 01" },
@@ -17,8 +21,14 @@ function Home() {
     { id: uuid(), title: "PROJECT 04" },
   ];
 
+  const showModal = () => {
+    setModalIsOpen(true);
+    if (modalIsOpen === true) setModalIsOpen(false);
+  };
+
   return (
     <StHomeContainer>
+      {modalIsOpen && <NewProjectModal setModalIsOpen={setModalIsOpen} />}
       <Navbar />
       <StMain>
         <StTitleWrapper>
@@ -34,7 +44,7 @@ function Home() {
             );
           })}
         </StProjectList>
-        <StNewProject>+ New Project</StNewProject>
+        <StNewProject onClick={showModal}>+ New Project</StNewProject>
       </StMain>
     </StHomeContainer>
   );
@@ -42,19 +52,10 @@ function Home() {
 
 export default Home;
 
-// Define keyframes for the animation
-const fillAnimation = keyframes`
-from {
-  background-position: 0% 50%;
-}
-to {
-  background-position: 100% 50%;
-}
-`;
-
 const StHomeContainer = styled.div`
   border: #d0d0d0 1px solid;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 1200px;
@@ -130,23 +131,15 @@ const StNewProject = styled.button`
   font-weight: 600;
   border: 4px solid #ff3030;
   color: #ff3030;
-  background: linear-gradient(to right, #ffffff, #ffffff);
+  background: white;
   background-size: 200% auto;
   padding: 10px;
   margin: 30px;
   border-radius: 9px;
   cursor: pointer;
-  transition: ease-in-out 0.4s;
-
+  transition: ease-in-out 0.3s;
   &:hover {
-    animation: ${fillAnimation} 1s ease infinite alternate;
-    color: white;
-    transform: scale(1.009);
-    background: linear-gradient(
-      to right,
-      #d9ff43,
-      #ff3030
-    ); /* gradient 배경색으로 변경 */
-    border: 4px solid #ff3030;
+    font-size: 25.5px;
+    /* transform: scale(1.009); */
   }
 `;
