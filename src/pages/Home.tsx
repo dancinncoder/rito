@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import Navbar from "../components/Navbar";
 import uuid from "react-uuid";
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ function Home() {
     { id: uuid(), title: "PROJECT 03" },
     { id: uuid(), title: "PROJECT 04" },
   ];
+
   return (
     <StHomeContainer>
       <Navbar />
@@ -27,7 +28,7 @@ function Home() {
         <StProjectList>
           {projects.map((project: ProjectType) => {
             return (
-              <StProject to="/project/:id">
+              <StProject key={project.id} to="/project/:id">
                 <StProjectTitle>{project?.title}</StProjectTitle>
               </StProject>
             );
@@ -40,6 +41,16 @@ function Home() {
 }
 
 export default Home;
+
+// Define keyframes for the animation
+const fillAnimation = keyframes`
+from {
+  background-position: 0% 50%;
+}
+to {
+  background-position: 100% 50%;
+}
+`;
 
 const StHomeContainer = styled.div`
   border: #d0d0d0 1px solid;
@@ -100,6 +111,11 @@ const StProject = styled(Link)`
   text-decoration: none;
   border-radius: 9px;
   margin: 30px;
+  transition: ease-in-out 0.15s;
+  &:hover {
+    background-color: #d62a2a;
+    transform: scale(1.02);
+  }
 `;
 
 const StProjectTitle = styled.h3``;
@@ -114,14 +130,23 @@ const StNewProject = styled.button`
   font-weight: 600;
   border: 4px solid #ff3030;
   color: #ff3030;
-  background-color: white;
+  background: linear-gradient(to right, #ffffff, #ffffff);
+  background-size: 200% auto;
   padding: 10px;
   margin: 30px;
   border-radius: 9px;
   cursor: pointer;
+  transition: ease-in-out 0.4s;
 
-  :hover {
-    background-color: #ff3030;
+  &:hover {
+    animation: ${fillAnimation} 1s ease infinite alternate;
     color: white;
+    transform: scale(1.009);
+    background: linear-gradient(
+      to right,
+      #d9ff43,
+      #ff3030
+    ); /* gradient 배경색으로 변경 */
+    border: 4px solid #ff3030;
   }
 `;
