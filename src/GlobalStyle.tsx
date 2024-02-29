@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: koho;
+    box-sizing: border-box;
   }
 
   .koho-extralight {
